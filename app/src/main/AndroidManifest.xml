@@ -22,6 +22,7 @@
     </activity>
     <activity
         android:name=".activity.CreateAccount"
+        android:label="Sign Up"
         android:windowSoftInputMode="stateHidden">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"
@@ -29,6 +30,7 @@
     </activity>
     <activity
         android:name=".activity.ForgotPassword"
+        android:launchMode="singleTop"
         android:windowSoftInputMode="stateHidden">
       <meta-data
           android:name="android.support.PARENT_ACTIVITY"

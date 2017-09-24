@@ -1,5 +1,6 @@
 package com.prathab.shopping.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -22,5 +23,9 @@ public class Login extends AppCompatActivity {
 
   @OnClick(R.id.buttonLogin) public void login() {
 
+  }
+
+  @OnClick(R.id.buttonSignUp) public void launchCreateAccount() {
+    startActivity(new Intent(this, CreateAccount.class));
   }
 }

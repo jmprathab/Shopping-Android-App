@@ -32,12 +32,8 @@ android {
 
 buildscript {
   ext {
-    retrofit = '2.3.0'
-    rxJava = '2.1.4'
-    rxAndroid = '2.0.1'
+    okhttp = "3.9.0"
     butterknife = '8.8.1'
-    jwt = '3.2.0'
-    dagger = "2.11"
     timber = "4.5.1"
   }
 }
@@ -48,26 +44,12 @@ dependencies {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
 
-  //Retrofit2
-  compile "com.squareup.retrofit2:retrofit:${retrofit}"
-  compile "com.squareup.retrofit2:converter-gson:${retrofit}"
-  compile "com.squareup.retrofit2:adapter-rxjava2:${retrofit}"
-  compile "com.squareup.retrofit2:converter-moshi:${retrofit}"
-
-  //Rx
-  compile "io.reactivex.rxjava2:rxandroid:${rxAndroid}"
-  compile "io.reactivex.rxjava2:rxjava:${rxJava}"
+  //Okhttp
+  compile "com.squareup.okhttp3:okhttp:${okhttp}"
 
   //Butterknife
   compile "com.jakewharton:butterknife:${butterknife}"
   annotationProcessor "com.jakewharton:butterknife-compiler:${butterknife}"
-
-  //JWT
-  compile "com.auth0:java-jwt:${jwt}"
-
-  //Dagger
-  compile "com.google.dagger:dagger:${dagger}"
-  annotationProcessor "com.google.dagger:dagger-compiler:${dagger}"
 
   //Timber
   compile "com.jakewharton.timber:timber:${timber}"

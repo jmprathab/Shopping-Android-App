@@ -1,3 +1,5 @@
+package com.prathab.shopping;
+
 import android.app.Application;
 import timber.log.Timber;
 

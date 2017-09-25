@@ -1,9 +1,12 @@
 package com.prathab.shopping.constants;
 
+import okhttp3.MediaType;
+
 /**
  * Constant class which has all the Jwt constants
  */
 public class JwtConstants {
+  public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
   /**
    * JWT Constants

@@ -9,4 +9,5 @@ public final class EndPoints {
 
   public static final String ACCOUNTS_URL = BASE_URL + "/accounts";
   public static final String ACCOUNTS_LOGIN = ACCOUNTS_URL + "/login";
+  public static final String ACCOUNTS_CREATE_ACCCOUNT = ACCOUNTS_URL + "/create";
 }

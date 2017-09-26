@@ -203,7 +203,7 @@ public class Login extends AppCompatActivity implements Callback {
   @Override public void onResponse(Call call, Response response) throws IOException {
     if (response.code() == 200) {
       loginSuccess(response);
-    } else if (response.code() == 401) {
+    } else {
       loginFailure(response);
     }
     hideProgress();

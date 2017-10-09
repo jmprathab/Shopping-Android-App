@@ -1,22 +1,22 @@
 package com.prathab.shopping.model;
 
 /**
- * Users class which represents user of the Application
+ * UsersModel class which represents user of the Application
  */
-public class Users {
+public class UsersModel {
   private String name;
   private String mobile;
   private String email;
   private String password;
 
-  private Users(Builder builder) {
+  private UsersModel(Builder builder) {
     this.name = builder.name;
     this.mobile = builder.mobile;
     this.email = builder.email;
     this.password = builder.password;
   }
 
-  private Users() {
+  private UsersModel() {
   }
 
   public String getMobile() {
@@ -82,8 +82,8 @@ public class Users {
       return this;
     }
 
-    public Users build() {
-      return new Users(this);
+    public UsersModel build() {
+      return new UsersModel(this);
     }
   }
 }

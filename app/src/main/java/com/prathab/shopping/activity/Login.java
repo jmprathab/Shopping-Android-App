@@ -142,7 +142,7 @@ public class Login extends AppCompatActivity implements Callback {
 
   private void startHomeActivity() {
     //TODO Start the home activity here
-    //Toast.makeText(Login.this, "Start Next Activity", Toast.LENGTH_SHORT).show();
+    startActivity(new Intent(Login.this, Products.class));
     finish();
   }
 
@@ -190,9 +190,7 @@ public class Login extends AppCompatActivity implements Callback {
       mAlertDialog = new AlertDialog.Builder(Login.this).setTitle("Cannot Login")
           .setMessage("Please try again later")
           .setCancelable(false)
-          .setPositiveButton("Okay", (dialog, which) -> {
-            dialog.dismiss();
-          })
+          .setPositiveButton("Okay", (dialog, which) -> dialog.dismiss())
           .create();
       mAlertDialog.show();
     });

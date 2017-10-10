@@ -6,12 +6,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.bumptech.glide.Glide;
 import com.prathab.shopping.R;
 import com.prathab.shopping.constants.EndPoints;
 import com.prathab.shopping.model.ProductsModel;
@@ -38,6 +40,7 @@ public class Products extends AppCompatActivity implements Callback {
   LinkedList<ProductsModel> products = new LinkedList<>();
   AlertDialog mAlertDialog;
   private OkHttpClient mOkHttpClient;
+  private DividerItemDecoration mDividerItemDecoration;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -51,8 +54,8 @@ public class Products extends AppCompatActivity implements Callback {
     ActionBar actionBar = getSupportActionBar();
     if (actionBar == null) {
       Timber.d("Action Bar is null");
-      return;
     }
+    actionBar.setDisplayHomeAsUpEnabled(true);
     mProgressDialog = new ProgressDialog(this);
     mOkHttpClient = new OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS)
         .readTimeout(15, TimeUnit.SECONDS)
@@ -62,7 +65,12 @@ public class Products extends AppCompatActivity implements Callback {
     mAdapter = new ProductsRecyclerViewAdapter(products);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setItemAnimator(new DefaultItemAnimator());
+    mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+        new LinearLayoutManager(this).getOrientation());
+    recyclerView.addItemDecoration(mDividerItemDecoration);
     recyclerView.setAdapter(mAdapter);
+
+    new Thread(() -> Glide.get(Products.this).clearDiskCache()).start();
   }
 
   @OnClick(R.id.buttonFetchProducts) public void fetchProducts() {

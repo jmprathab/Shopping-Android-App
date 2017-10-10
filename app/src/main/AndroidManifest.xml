@@ -3,6 +3,7 @@
     package="com.prathab.shopping">
 
   <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
   <application
       android:name=".ShoppingApplication"
@@ -37,7 +38,9 @@
           android:name="android.support.PARENT_ACTIVITY"
           android:value=".activity.Login"/>
     </activity>
-    <activity android:name=".activity.Products">
+    <activity
+        android:name=".activity.Products"
+        android:label="Products">
     </activity>
   </application>
 

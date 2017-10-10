@@ -5,16 +5,18 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
+import com.prathab.shopping.LoggingListener;
 import com.prathab.shopping.R;
 import com.prathab.shopping.model.ProductsModel;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ProductsRecyclerViewAdapter
     extends RecyclerView.Adapter<ProductsRecyclerViewAdapter.MyViewHolder> {
 
-  LinkedList<ProductsModel> products;
+  private LinkedList<ProductsModel> products;
 
   public ProductsRecyclerViewAdapter(LinkedList<ProductsModel> products) {
     this.products = products;
@@ -28,37 +30,44 @@ public class ProductsRecyclerViewAdapter
 
   @Override public void onBindViewHolder(MyViewHolder holder, int position) {
     ProductsModel current = products.get(position);
-    holder.name.setText("Name : " + current.getName());
-    holder.price.setText("Price : " + current.getPrice());
-    holder.description.setText("Description : " + current.getDescription());
+    holder.name.setText(current.getName());
+    holder.price.setText("Rs." + current.getPrice());
+    holder.description.setText(current.getDescription());
 
+    /*
     ArrayList<String> tagsList = current.getTags();
-    holder.tags.setText("Tags : ");
     for (int i = 0; i < tagsList.size(); i++) {
       holder.tags.setText(holder.tags.getText() + "," + tagsList.get(i));
     }
+    */
 
-    ArrayList<String> images = current.getImages();
-    holder.images.setText("Images : ");
-    for (int i = 0; i < images.size(); i++) {
-      holder.images.setText(holder.images.getText() + "," + images.get(i));
-    }
+    //String firstImage = current.getImages().get(0);
+    String text = current.getName() + " ";
+    text = text.split(" ")[0];
+    String firstImage = "http://via.placeholder.com/1000/FF9800/FFFFFF?text=" + text;
+    Glide.with(holder.image.getContext())
+        .load(firstImage)
+        .placeholder(R.drawable.product_placeholder)
+        .error(R.drawable.product_placeholder)
+        .crossFade()
+        .listener(new LoggingListener<>())
+        .into(holder.image);
   }
 
   @Override public int getItemCount() {
     return products.size();
   }
 
-  public class MyViewHolder extends ViewHolder {
-    TextView name, price, description, tags, images;
+  class MyViewHolder extends ViewHolder {
+    TextView name, price, description;
+    ImageView image;
 
-    public MyViewHolder(View itemView) {
+    MyViewHolder(View itemView) {
       super(itemView);
       name = (TextView) itemView.findViewById(R.id.name);
       price = (TextView) itemView.findViewById(R.id.price);
       description = (TextView) itemView.findViewById(R.id.description);
-      tags = (TextView) itemView.findViewById(R.id.tags);
-      images = (TextView) itemView.findViewById(R.id.images);
+      image = (ImageView) itemView.findViewById(R.id.image);
     }
   }
 }

@@ -3,43 +3,55 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+    android:orientation="horizontal"
     >
 
-  <TextView
-      android:id="@+id/name"
+  <ImageView
+      android:id="@+id/image"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_gravity="center"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      />
+
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Name : Name of the product"
-      />
+      android:orientation="vertical"
+      >
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:maxLines="2"
+        android:text="Name of the product"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textStyle="bold"
+        />
 
-  <TextView
-      android:id="@+id/price"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Price : Rs.1,00,000"
-      />
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Price : Rs.1,00,000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold"
+        />
 
-  <TextView
-      android:id="@+id/description"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Description : Description of the product"
-      />
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:maxLines="2"
+        android:text="Description : Description of the product"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        />
 
-  <TextView
-      android:id="@+id/tags"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Tag : "
-      />
-
-  <TextView
-      android:id="@+id/images"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Images : "
-      />
+  </LinearLayout>
 </LinearLayout>

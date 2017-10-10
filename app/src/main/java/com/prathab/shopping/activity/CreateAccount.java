@@ -54,7 +54,6 @@ public class CreateAccount extends AppCompatActivity implements Callback {
     ActionBar actionBar = getSupportActionBar();
     if (actionBar == null) {
       Timber.d("Action Bar is null");
-      return;
     }
     actionBar.setDisplayHomeAsUpEnabled(true);
     mProgressDialog = new ProgressDialog(this);

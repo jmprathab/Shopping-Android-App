@@ -42,6 +42,14 @@
         android:name=".activity.Products"
         android:label="Products">
     </activity>
+    <activity
+        android:name=".activity.ProductDetail"
+        android:label="Products Detail"
+        android:launchMode="singleTop">
+      <meta-data
+          android:name="android.support.PARENT_ACTIVITY"
+          android:value=".activity.ProductDetail"/>
+    </activity>
   </application>
 
 </manifest>

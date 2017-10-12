@@ -70,6 +70,7 @@ public class Products extends AppCompatActivity implements Callback {
     recyclerView.addItemDecoration(mDividerItemDecoration);
     recyclerView.setAdapter(mAdapter);
 
+    //TODO Remove this after testing
     new Thread(() -> Glide.get(Products.this).clearDiskCache()).start();
   }
 

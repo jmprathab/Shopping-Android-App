@@ -1,5 +1,6 @@
 package com.prathab.shopping.views;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.prathab.shopping.LoggingListener;
 import com.prathab.shopping.R;
+import com.prathab.shopping.activity.ProductDetail;
 import com.prathab.shopping.model.ProductsModel;
 import java.util.LinkedList;
 
@@ -33,6 +35,12 @@ public class ProductsRecyclerViewAdapter
     holder.name.setText(current.getName());
     holder.price.setText("Rs." + current.getPrice());
     holder.description.setText(current.getDescription());
+
+    holder.image.setOnClickListener(v -> {
+      Intent intent = new Intent(holder.image.getContext(), ProductDetail.class);
+      intent.putExtra("products_model", products.get(position));
+      holder.image.getContext().startActivity(intent);
+    });
 
     /*
     ArrayList<String> tagsList = current.getTags();

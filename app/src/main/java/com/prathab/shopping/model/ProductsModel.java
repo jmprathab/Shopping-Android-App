@@ -1,8 +1,9 @@
 package com.prathab.shopping.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProductsModel {
+public class ProductsModel implements Serializable {
   private String id;
   private String name;
   private String price;

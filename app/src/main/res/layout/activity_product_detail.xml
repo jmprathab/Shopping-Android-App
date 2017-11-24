@@ -58,12 +58,14 @@
         />
 
     <Button
+        android:id="@+id/addToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="8dp"
-        android:text="Buy Now"
+        android:text="Add to cart"
         />
+
   </RelativeLayout>
 
 </ScrollView>

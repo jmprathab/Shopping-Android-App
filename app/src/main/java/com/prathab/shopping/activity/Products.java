@@ -131,7 +131,7 @@ public class Products extends AppCompatActivity implements Callback {
   private void fetchProductsFailure(Response response) {
     String message;
     if (response == null) {
-      message = "Unexpected error";
+      message = "Unexpected error response is null";
       Timber.d("response is null," + message);
     } else {
       message = "Unexpected error";

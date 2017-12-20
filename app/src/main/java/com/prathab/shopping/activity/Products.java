@@ -184,16 +184,23 @@ public class Products extends AppCompatActivity implements Callback {
         String price = currentProduct.getString("price");
         int rating = currentProduct.getInt("rating");
 
-        JSONArray images = currentProduct.getJSONArray("images");
-        ArrayList<String> imagesList = new ArrayList<>(images.length());
-        for (int j = 0; j < images.length(); j++) {
-          imagesList.add(images.getString(j));
+        ArrayList<String> imagesList, tagsList;
+        imagesList = tagsList = null;
+
+        if (currentProduct.has("images")) {
+          JSONArray images = currentProduct.getJSONArray("images");
+          imagesList = new ArrayList<>(images.length());
+          for (int j = 0; j < images.length(); j++) {
+            imagesList.add(images.getString(j));
+          }
         }
 
-        JSONArray tags = currentProduct.getJSONArray("tags");
-        ArrayList<String> tagsList = new ArrayList<>(tags.length());
-        for (int j = 0; j < tags.length(); j++) {
-          tagsList.add(tags.getString(j));
+        if (currentProduct.has("tags")) {
+          JSONArray tags = currentProduct.getJSONArray("tags");
+          tagsList = new ArrayList<>(tags.length());
+          for (int j = 0; j < tags.length(); j++) {
+            tagsList.add(tags.getString(j));
+          }
         }
 
         ProductsModel productsModel =

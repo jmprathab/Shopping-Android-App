@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity implements Callback {
 
   @OnClick(R.id.buttonLogin) public void login() {
     //TODO: Remove this
-    startHomeActivity();
+    //startHomeActivity();
     String mobile = mEditTextMobile.getText().toString().trim();
     String password = mEditTextPassword.getText().toString().trim();
     if (!Validators.isMobileValid(mobile) || !Validators.isPasswordValid(password)) {

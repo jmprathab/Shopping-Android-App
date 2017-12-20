@@ -33,7 +33,8 @@ public class ProductDetail extends AppCompatActivity {
     description.setText(productsModel.getDescription());
 
     Glide.with(this)
-        .load(productsModel.getImages().get(0))
+        .load(productsModel.getImages() == null ? R.drawable.product_placeholder
+            : productsModel.getImages().get(0))
         .placeholder(R.drawable.product_placeholder)
         .error(R.drawable.product_placeholder)
         .crossFade()

@@ -85,6 +85,95 @@ public class ProductDetail extends AppCompatActivity implements Callback {
     mOkHttpClient.newCall(createAddToCartRequest()).enqueue(this);
   }
 
+  @OnClick(R.id.checkout) public void checkout() {
+    showProgress();
+
+    mOkHttpClient.newCall(createCheckoutRequest()).enqueue(new Callback() {
+      @Override public void onFailure(Call call, IOException e) {
+        Timber.d("Checkout request failed : %s", e.getCause());
+
+        ProductDetail.this.runOnUiThread(() -> {
+          mAlertDialog = new AlertDialog.Builder(ProductDetail.this).setTitle("Cannot checkout")
+              .setMessage("Please try again later")
+              .setCancelable(false)
+              .setPositiveButton("Okay", (dialog, which) -> dialog.dismiss())
+              .create();
+          mAlertDialog.show();
+        });
+
+        hideProgress();
+      }
+
+      @Override public void onResponse(Call call, Response response) throws IOException {
+        if (response.code() == 200) {
+          checkoutSuccess(response);
+        } else {
+          checkoutFailure(response);
+        }
+        hideProgress();
+      }
+    });
+  }
+
+  private void checkoutFailure(Response response) {
+    String message;
+    if (response == null) {
+      message = "Unexpected error response is null";
+      Timber.d("response is null," + message);
+    } else {
+      message = "Unexpected error";
+      Timber.d(message);
+    }
+
+    ProductDetail.this.runOnUiThread(() -> {
+      mAlertDialog = new AlertDialog.Builder(ProductDetail.this).setTitle("Cannot checkout")
+          .setMessage(message)
+          .setCancelable(false)
+          .setPositiveButton("Okay", (dialog, which) -> {
+            dialog.dismiss();
+          })
+          .create();
+      mAlertDialog.show();
+    });
+  }
+
+  private void checkoutSuccess(Response response) {
+    if (response.code() != 200) {
+      Timber.d("checkoutSuccess() was actually a failure");
+      checkoutFailure(null);
+    }
+
+    ProductDetail.this.runOnUiThread(() -> {
+      mAlertDialog = new AlertDialog.Builder(ProductDetail.this).setTitle("Success")
+          .setMessage("Successfully checked out")
+          .setCancelable(false)
+          .setPositiveButton("Okay", (dialog, which) -> {
+            dialog.dismiss();
+          })
+          .create();
+      mAlertDialog.show();
+    });
+
+    Timber.d("Successfully checked out : Response 200");
+  }
+
+  private Request createCheckoutRequest() {
+    JSONObject jsonObject = new JSONObject();
+
+    RequestBody requestBody = RequestBody.create(JwtConstants.JSON, jsonObject.toString());
+
+    Timber.d("Making checkout request[POST] to URL %s", EndPoints.CARTS_URL + "/checkout");
+
+    SharedPreferences pref =
+        getSharedPreferences(SharedPreferencesConstants.SHARED_PREFERENCES_NAME, MODE_PRIVATE);
+    String jwtToken = pref.getString(SharedPreferencesConstants.JWT_TOKEN, "");
+
+    return new Request.Builder().post(requestBody)
+        .url(EndPoints.CARTS_URL + "/checkout")
+        .header(HTTP_HEADER_JWT_TOKEN, jwtToken)
+        .build();
+  }
+
   private Request createAddToCartRequest() {
     JSONObject jsonObject = new JSONObject();
     ProductsModel productsModel = (ProductsModel) getIntent().getExtras().get("products_model");
@@ -151,16 +240,13 @@ public class ProductDetail extends AppCompatActivity implements Callback {
       Timber.d(message);
     }
 
-    ProductDetail.this.runOnUiThread(() -> {
-      mAlertDialog = new AlertDialog.Builder(ProductDetail.this).setTitle("Cannot add to cart")
-          .setMessage(message)
-          .setCancelable(false)
-          .setPositiveButton("Okay", (dialog, which) -> {
-            dialog.dismiss();
-          })
-          .create();
-      mAlertDialog.show();
-    });
+    ProductDetail.this.runOnUiThread(
+        () -> new AlertDialog.Builder(ProductDetail.this).setTitle("Cannot add to cart")
+            .setMessage("Add to cart failed")
+            .setCancelable(false)
+            .setPositiveButton("Okay", (dialog, which) -> dialog.dismiss())
+            .create()
+            .show());
   }
 
   private void addToCartSuccess(Response response) {
@@ -168,6 +254,13 @@ public class ProductDetail extends AppCompatActivity implements Callback {
       Timber.d("addToCartSuccess() was actually a failure");
       addToCartFailure(null);
     }
+    ProductDetail.this.runOnUiThread(
+        () -> new AlertDialog.Builder(ProductDetail.this).setTitle("Success")
+            .setMessage("Successfully added to cart")
+            .setCancelable(false)
+            .setPositiveButton("Okay", (dialog, which) -> dialog.dismiss())
+            .create()
+            .show());
 
     Timber.d("Successfully added product to cart : Response 200");
   }

@@ -90,6 +90,7 @@ public class ProductDetail extends AppCompatActivity implements Callback {
     ProductsModel productsModel = (ProductsModel) getIntent().getExtras().get("products_model");
     try {
       jsonObject.put("productsId", productsModel.getId());
+      jsonObject.put("quantity", 1);
     } catch (JSONException e) {
       e.printStackTrace();
     }

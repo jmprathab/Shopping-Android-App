@@ -1,6 +1,7 @@
 package com.prathab.shopping.activity;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,7 @@ import butterknife.OnClick;
 import com.bumptech.glide.Glide;
 import com.prathab.shopping.R;
 import com.prathab.shopping.constants.EndPoints;
+import com.prathab.shopping.constants.SharedPreferencesConstants;
 import com.prathab.shopping.model.ProductsModel;
 import com.prathab.shopping.views.ProductsRecyclerViewAdapter;
 import java.io.IOException;
@@ -32,6 +34,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import timber.log.Timber;
+
+import static com.prathab.shopping.constants.HttpConstants.HTTP_HEADER_JWT_TOKEN;
 
 public class Products extends AppCompatActivity implements Callback {
   @BindView(R.id.recyclerView) RecyclerView recyclerView;
@@ -75,7 +79,6 @@ public class Products extends AppCompatActivity implements Callback {
   }
 
   @OnClick(R.id.buttonFetchProducts) public void fetchProducts() {
-    //TODO: fetch a list of products from api and display in recycler view
     showProgress();
 
     mOkHttpClient.newCall(createFetchProductsRequest()).enqueue(this);
@@ -89,7 +92,10 @@ public class Products extends AppCompatActivity implements Callback {
 
     Timber.d("Making fetch products request[GET] to URL %s", url);
 
-    return new Request.Builder().url(url).build();
+    SharedPreferences pref = getSharedPreferences(SharedPreferencesConstants.SHARED_PREFERENCES_NAME, MODE_PRIVATE);
+    String jwtToken = pref.getString(SharedPreferencesConstants.JWT_TOKEN,"");
+
+    return new Request.Builder().get().url(url).header(HTTP_HEADER_JWT_TOKEN,jwtToken).build();
   }
 
   private void hideProgress() {

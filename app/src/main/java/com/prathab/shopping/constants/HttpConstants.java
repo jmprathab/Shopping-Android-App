@@ -7,7 +7,7 @@ public class HttpConstants {
   /**
    * Header Constants
    */
-  public static final String HTTP_HEADER_JWT_TOKEN = "Token";
+  public static final String HTTP_HEADER_JWT_TOKEN = "Authorization";
 
   /**
    * Param Constants

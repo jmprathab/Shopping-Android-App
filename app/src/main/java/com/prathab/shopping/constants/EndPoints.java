@@ -20,4 +20,9 @@ public final class EndPoints {
    * ProductsModel endpoint URL
    */
   public static final String PRODUCTS_URL = BASE_URL + "/products";
+
+  /**
+   * Carts endpoint URL
+   */
+  public static final String CARTS_URL = BASE_URL + "/carts";
 }

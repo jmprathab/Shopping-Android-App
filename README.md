@@ -9,7 +9,7 @@ Android Shopping Application which uses [Shopping-REST-Api](https://github.com/j
 
 ## Screenshot
 
-![Login_Image_](https://user-images.githubusercontent.com/11979066/34649586-20b29410-f3d8-11e7-9c26-f5ccae104c7c.png)
+<img src="https://user-images.githubusercontent.com/11979066/34649586-20b29410-f3d8-11e7-9c26-f5ccae104c7c.png" width="400"/>
 
 ## Installing
 
